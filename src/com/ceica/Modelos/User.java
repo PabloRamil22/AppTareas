@@ -2,9 +2,9 @@ package com.ceica.Modelos;
 
 import com.ceica.BBDD.Conexion;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PrimitiveIterator;
 
 public class User extends ModeloBase {
@@ -63,6 +63,90 @@ public class User extends ModeloBase {
             return false;
         }
 
+    }
+    public static boolean editarUserName(String idUser, String UserName){
+        Connection conn = Conexion.conectar();
+        String sql="update user set UserName = ? where idUser = ?";
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, idUser);
+            if (pst.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            return false;
+        }
+    }
+
+    public static boolean editarPassWord(String idUser, String PassWord){
+        Connection conn = Conexion.conectar();
+        String sql="update user set PassWord = ? where idUser = ?";
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, idUser);
+            if (pst.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            return false;
+        }
+    }
+
+    public static boolean editarRol(String idUser, String Rol){
+        Connection conn = Conexion.conectar();
+        String sql= "update user set Rol = ? where idUser = ?";
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, idUser);
+            if (pst.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            return false;
+        }
+    }
+    public static List<User> getUser() {
+        List<User> userList = new ArrayList<>();
+        Connection conn = Conexion.conectar();
+        String sql = "select * from user";
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet respuesta = stm.executeQuery(sql);
+            while (respuesta.next()) {
+                User user = new User();
+                user.setUserName(respuesta.getString("UserName"));
+                user.setPassword(respuesta.getString("PassWord"));
+                user.setRol(respuesta.getString("Rol"));
+                userList.add(user);
+
+            }
+
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+
+            return userList;
+        }
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+        }
+        return userList;
     }
 
     @Override

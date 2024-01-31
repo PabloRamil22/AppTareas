@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class Usuario {
     public static boolean getUsuario(String usr,String pass){
         Connection conn=Conexion.conectar();
-        String sql="select * from user where UserName=? and Password=?";
+        String sql="select * from user where UserName=? and PassWord=?";
         try {
             PreparedStatement pst=conn.prepareStatement(sql);
             pst.setString(1,usr);

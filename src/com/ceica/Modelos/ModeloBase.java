@@ -23,8 +23,8 @@ public abstract class ModeloBase{
         try (FileInputStream entrada = new FileInputStream(CONFIG_FILE)) {
             propiedades.load(entrada);
             URL = propiedades.getProperty("db.url");
-            USUARIO = propiedades.getProperty("db.UserName");
-            PASSWORD = propiedades.getProperty("db.Password");
+            USUARIO = propiedades.getProperty("db.usuario");
+            PASSWORD = propiedades.getProperty("db.password");
         } catch (IOException e) {
             e.printStackTrace();
         }

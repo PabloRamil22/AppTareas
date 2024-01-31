@@ -17,10 +17,10 @@ public class Conexion {
             propiedades.load(entrada);
             // Obtener la configuración de la base de datos
             url = propiedades.getProperty("db.url");
-            usuario = propiedades.getProperty("db.UserName");
-            password = propiedades.getProperty("db.Password");
+            usuario = propiedades.getProperty("db.usuario");
+            password = propiedades.getProperty("db.password");
         } catch (Exception e) {
-            url = "jdbc:mysql://localhost:3306/apptareas";
+            url = "jdbc:mysql://localhost:3306/AppTareas";
             usuario = "root";
             password = "1234";
 
