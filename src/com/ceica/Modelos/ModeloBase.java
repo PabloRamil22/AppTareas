@@ -36,7 +36,7 @@ public abstract class ModeloBase{
     // Métodos para CRUD
 
     public boolean insertar(String sql, Object... parametros) {
-        sql="insert into"+getNombreTabla()+" "+sql;
+        sql="insert into "+getNombreTabla()+" "+sql;
         return ejecutarQuery(sql, parametros);
     }
 
